@@ -19,7 +19,10 @@ ORDERED_OBJS += \
 "./Tiva_Extra/hardware_helper/hardware_helper_adc.obj" \
 "./Tiva_Extra/hardware_helper/hardware_helper_dma.obj" \
 "./Tiva_Extra/hardware_helper/hardware_helper_gpio.obj" \
+"./Tiva_Extra/hardware_helper/hardware_helper_pwm.obj" \
+"./Tiva_Extra/tiva_utils/peripheral_utils.obj" \
 "./Tiva_Extra/tiva_utils/pin_utils.obj" \
+"./Tiva_Extra/tiva_utils/pwm_utils.obj" \
 "./src/main.obj" \
 "./src/stepper_driver_A4988.obj" \
 "../tm4c123gh6pm.cmd" \
@@ -28,7 +31,6 @@ ORDERED_OBJS += \
 "../Tiva_Extra/Tivaware_Dep/sensorlib/ccs/Debug/sensorlib.lib" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
--l"/home/kd/A4988_Driver_Tiva/Tiva_Extra/Tivaware_Dep/sensorlib/ccs/Debug/sensorlib.lib" \
 -l"/home/kd/A4988_Driver_Tiva/Tiva_Extra/Tivaware_Dep/sensorlib/ccs/Debug/sensorlib.lib" \
 
 -include ../makefile.init
@@ -174,7 +176,7 @@ all: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 A4988_Driver.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: ARM Linker'
-	"/home/kd/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=TARGET_IS_TM4C123_RB1 --define=PART_TM4C123GH6PM -g --c99 --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"A4988_Driver.map" --heap_size=0 --stack_size=512 -i"/home/kd/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/lib" -i"/home/kd/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="A4988_Driver_linkInfo.xml" --rom_model -o "A4988_Driver.out" $(ORDERED_OBJS)
+	"/home/kd/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=TARGET_IS_TM4C123_RB1 --define=PART_TM4C123GH6PM -g --c99 --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"A4988_Driver.map" --heap_size=0 --stack_size=2048 -i"/home/kd/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/lib" -i"/home/kd/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="A4988_Driver_linkInfo.xml" --rom_model -o "A4988_Driver.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
@@ -188,9 +190,9 @@ A4988_Driver.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "tm4c123gh6pm_startup_ccs.obj" "Tiva_Extra/Tivaware_Dep/driverlib/epi_workaround_ccs.obj" "Tiva_Extra/Tivaware_Dep/drivers/buttons.obj" "Tiva_Extra/Tivaware_Dep/drivers/rgb.obj" "Tiva_Extra/Tivaware_Dep/utils/softuart.obj" "Tiva_Extra/Tivaware_Dep/utils/uartstdio.obj" "Tiva_Extra/Tivaware_Dep/utils/ustdlib.obj" "Tiva_Extra/hardware_helper/hardware_helper.obj" "Tiva_Extra/hardware_helper/hardware_helper_adc.obj" "Tiva_Extra/hardware_helper/hardware_helper_dma.obj" "Tiva_Extra/hardware_helper/hardware_helper_gpio.obj" "Tiva_Extra/tiva_utils/pin_utils.obj" "src/main.obj" "src/stepper_driver_A4988.obj" 
+	-$(RM) "tm4c123gh6pm_startup_ccs.obj" "Tiva_Extra/Tivaware_Dep/driverlib/epi_workaround_ccs.obj" "Tiva_Extra/Tivaware_Dep/drivers/buttons.obj" "Tiva_Extra/Tivaware_Dep/drivers/rgb.obj" "Tiva_Extra/Tivaware_Dep/utils/softuart.obj" "Tiva_Extra/Tivaware_Dep/utils/uartstdio.obj" "Tiva_Extra/Tivaware_Dep/utils/ustdlib.obj" "Tiva_Extra/hardware_helper/hardware_helper.obj" "Tiva_Extra/hardware_helper/hardware_helper_adc.obj" "Tiva_Extra/hardware_helper/hardware_helper_dma.obj" "Tiva_Extra/hardware_helper/hardware_helper_gpio.obj" "Tiva_Extra/hardware_helper/hardware_helper_pwm.obj" "Tiva_Extra/tiva_utils/peripheral_utils.obj" "Tiva_Extra/tiva_utils/pin_utils.obj" "Tiva_Extra/tiva_utils/pwm_utils.obj" "src/main.obj" "src/stepper_driver_A4988.obj" 
 	-$(RM) "tm4c123gh6pm_startup_ccs.d" "Tiva_Extra/Tivaware_Dep/drivers/buttons.d" "Tiva_Extra/Tivaware_Dep/drivers/rgb.d" "Tiva_Extra/Tivaware_Dep/utils/softuart.d" "Tiva_Extra/Tivaware_Dep/utils/uartstdio.d" "Tiva_Extra/Tivaware_Dep/utils/ustdlib.d" 
-	-$(RM) "Tiva_Extra/hardware_helper/hardware_helper.d" "Tiva_Extra/hardware_helper/hardware_helper_adc.d" "Tiva_Extra/hardware_helper/hardware_helper_dma.d" "Tiva_Extra/hardware_helper/hardware_helper_gpio.d" "Tiva_Extra/tiva_utils/pin_utils.d" "src/main.d" "src/stepper_driver_A4988.d" 
+	-$(RM) "Tiva_Extra/hardware_helper/hardware_helper.d" "Tiva_Extra/hardware_helper/hardware_helper_adc.d" "Tiva_Extra/hardware_helper/hardware_helper_dma.d" "Tiva_Extra/hardware_helper/hardware_helper_gpio.d" "Tiva_Extra/hardware_helper/hardware_helper_pwm.d" "Tiva_Extra/tiva_utils/peripheral_utils.d" "Tiva_Extra/tiva_utils/pin_utils.d" "Tiva_Extra/tiva_utils/pwm_utils.d" "src/main.d" "src/stepper_driver_A4988.d" 
 	-$(RM) "Tiva_Extra/Tivaware_Dep/driverlib/epi_workaround_ccs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
