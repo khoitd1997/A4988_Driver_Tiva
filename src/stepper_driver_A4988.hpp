@@ -13,7 +13,9 @@ enum class MicroStepRes { FULL, HALF, QUARTER, EIGHTH, SIXTEENTH };
 
 typedef struct A4988Config {
   MicroStepRes microStepRes;
-  A4988Config(MicroStepRes microStepRes);
+  bool isCCW;
+
+  A4988Config::A4988Config(MicroStepRes microStepRes, const bool &isCCW);
 } A4988Config;
 
 // 8 pins

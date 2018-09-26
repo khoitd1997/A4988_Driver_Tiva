@@ -120,5 +120,6 @@ Tiva_Extra/Tivaware_Dep/sensorlib/ccs/Debug \
 Tiva_Extra/Tivaware_Dep/utils \
 Tiva_Extra/hardware_helper \
 Tiva_Extra/tiva_utils \
+general_timer \
 src \
 
